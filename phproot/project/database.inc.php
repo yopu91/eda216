@@ -101,21 +101,18 @@ class Database {
 	}
 	
 	/**
-	 * Check if a user with the specified user id exists in the database.
-	 * Queries the Users database table.
+	 * Fetchets the recipe from the database. User provides name of recipe
+	 * 
 	 *
-	 * @param userId The user id 
-	 * @return true if the user exists, false otherwise.
+	 * @param name Name of the recipe
+	 * @return list of ingridents
 	 */
-	public function userExists($userId) {
+	public function getRecipe($name) {
 		$sql = "select username from Users where username = ?";
 		$result = $this->executeQuery($sql, array($userId));
 		return count($result) == 1; 
 	}
 
-	/*
-	 * *** Add functions ***
-	 */
 
 	
 	/**
