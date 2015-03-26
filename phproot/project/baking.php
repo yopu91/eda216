@@ -52,6 +52,8 @@ $cookies = $db->getCookies();
         echo '</tr>';
     }
 ?>
+    </tbody>
+    </table>
 </body>
 </html>
 
