@@ -1,10 +1,6 @@
 <?php
 require_once('database.inc.php');
 
-session_start();
-$db = $_SESSION['db'];
-$db->openConnection();
-
 $cookie = $_GET['cookie'];
 
 if ($cookie)
@@ -27,15 +23,16 @@ $cookies = $db->getCookies();
         <select name=cookie>
         <option<?php if (!$cookie) { echo' selected'; } ?>>
 <?php
-        foreach ($name as $cookies) {
+        foreach ($cookies as $name) {
             echo "<option value='$name'";
             if ($name == $cookie) {
                 echo ' selected';
             }
-            echo '>';
+            echo ">$name</option>";
         }
 ?>
         </select>
+    <input type=submit value=Get>
     </form>
 
     <table>

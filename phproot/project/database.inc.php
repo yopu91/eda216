@@ -1,13 +1,5 @@
 <?php
-/*
- * Class Database: interface to the movie database from PHP.
- *
- * You must:
- *
- * 1) Change the function userExists so the SQL query is appropriate for your tables.
- * 2) Write more functions.
- *
- */
+
 class Database {
     private $host;
     private $userName;
@@ -108,9 +100,18 @@ class Database {
      * @return list of ingridents
      */
     public function getRecipe($name) {
-        $sql = "select ingredientName, amount from ingredient where cookieName = ?";
+        $sql = 'select ingredientName, amount from ingredient where cookieName = ?';
         $result = $this->executeQuery($sql, array($userId));
         return $result; 
+    }
+
+    public function getCookies() {
+        $sql = 'select name from cookieType';
+        $result = $this->executeQuery($sql);
+        $array = array();
+        foreach ($result as $row)
+            $array[] = $row['name'];
+        return $array;
     }
 
     /**
@@ -189,4 +190,17 @@ class Database {
         return $result[0][0];
     }
 }
+
+// ini_set('display_errors', 'On');        
+// error_reporting(E_ALL | E_STRICT);
+
+require_once('mysql_connect_data.inc.php');
+
+$db = new Database($host, $userName, $password, $database);
+$db->openConnection();
+
+if (!$db->isConnected()) {
+        exit();
+}
+
 ?>
