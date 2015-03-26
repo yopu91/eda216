@@ -23,15 +23,16 @@ $cookies = $db->getCookies();
         <select name=cookie>
         <option<?php if (!$cookie) { echo' selected'; } ?>>
 <?php
-        foreach ($name as $cookies) {
+        foreach ($cookies as $name) {
             echo "<option value='$name'";
             if ($name == $cookie) {
                 echo ' selected';
             }
-            echo '>';
+            echo ">$name</option>";
         }
 ?>
         </select>
+    <input type=submit value=Get>
     </form>
 
     <table>
