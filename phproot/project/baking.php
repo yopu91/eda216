@@ -19,7 +19,7 @@ $cookies = $db->getCookies();
         echo "<h2>$cookie</h2>";
     } 
 ?>
-    <form action=/cookie.php method=get>
+    <form action=/project/baking.php method=get>
         <select name=cookie>
         <option<?php if (!$cookie) { echo' selected'; } ?>>
 <?php
@@ -40,5 +40,18 @@ $cookies = $db->getCookies();
         <th>Ingredient</th>
         <th>Amount</th>
     </thead>
+    <tbody>
+<?php
+    foreach ($cookieRecipe as $recipe) {
+        $ingredient = $recipe['ingredientName'];
+        $amount = $recipe['amount'];
+
+        echo '<tr>';
+        echo "<td>$ingredient</td>";
+        echo "<td>$amount</td>";
+        echo '</tr>';
+    }
+?>
 </body>
 </html>
+
