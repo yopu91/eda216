@@ -23,7 +23,7 @@ create table ingredientType (
 
 drop table if exists customerOrder;
 create table customerOrder (
-    number integer not null,
+    number integer not null auto_increment,
     customerName varchar(255) not null,
     received datetime not null,
     delivery datetime not null,
