@@ -5,16 +5,19 @@
 	$db = $_SESSION['db'];
 	$userId = $_SESSION['userId'];
 	$db->openConnection();
-	
+
+	$avalPallets = $db->getAllPallets();
+	$blockedPallets = $db->getBlockedPallets();
 //	$movieNames = $db->getMovieNames();
 //	$db->closeConnection();
 ?>
 
 <html>
 <head><title>Krusty Kookies Sweden AB</title><head>
-<body><h1>Production</h1>
-	<h1>Blocking</h1>
-	<h1>Search</h1>
+<body>
+<h1>Production</h1>
+<h1>Blocking</h1>
+<h1>Search</h1>
 	Current user: <?php print $userId ?>
 	<p>
 	Movies showing:
