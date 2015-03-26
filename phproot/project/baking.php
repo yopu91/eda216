@@ -1,10 +1,6 @@
 <?php
 require_once('database.inc.php');
 
-session_start();
-$db = $_SESSION['db'];
-$db->openConnection();
-
 $cookie = $_GET['cookie'];
 
 if ($cookie)

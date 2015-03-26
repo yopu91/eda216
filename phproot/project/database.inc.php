@@ -1,13 +1,5 @@
 <?php
-/*
- * Class Database: interface to the movie database from PHP.
- *
- * You must:
- *
- * 1) Change the function userExists so the SQL query is appropriate for your tables.
- * 2) Write more functions.
- *
- */
+
 class Database {
     private $host;
     private $userName;
@@ -189,4 +181,17 @@ class Database {
         return $result[0][0];
     }
 }
+
+ini_set('display_errors', 'On');        
+error_reporting(E_ALL | E_STRICT);
+
+require_once('mysql_connect_data.inc.php');
+
+$db = new Database($host, $userName, $password, $database);
+$db->openConnection();
+
+if (!$db->isConnected()) {
+        exit();
+}
+
 ?>
