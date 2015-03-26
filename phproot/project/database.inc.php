@@ -101,7 +101,7 @@ class Database {
      */
     public function getRecipe($name) {
         $sql = 'select ingredientName, amount from ingredient where cookieName = ?';
-        $result = $this->executeQuery($sql, array($userId));
+        $result = $this->executeQuery($sql, array($name));
         return $result; 
     }
 
