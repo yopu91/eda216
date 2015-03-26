@@ -121,7 +121,7 @@ class Database {
     }
 
     public function getBlockedPallets() {
-        $sql = 'select barcode, cookieName, blocked from pallet';
+        $sql = 'select barcode, cookieName, blocked from pallet where blocked';
         $result = $this->executeQuery($sql);
         return $result;
     }
