@@ -4,21 +4,15 @@
 	
 	$db = new Database($host, $userName, $password, $database);
 	$db->openConnection();
+
 	if (!$db->isConnected()) {
-		header("Location: cannotConnect.html");
+//		header("Location: cannotConnect.html");
 		exit();
 	}
-	
-	$userId = $_REQUEST['userId'];
-	if (!$db->userExists($userId)) {
-		$db->closeConnection();
-		header("Location: noSuchUser.html");
-		exit();
-	}
-	$db->closeConnection();
+
+        echo 'Wellkom!';
 	
 	session_start();
 	$_SESSION['db'] = $db;
-	$_SESSION['userId'] = $userId;
-	header("Location: booking1.php");
+	header("Location: index.html");
 ?>
