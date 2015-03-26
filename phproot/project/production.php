@@ -3,13 +3,10 @@
 	
 	session_start();
 	$db = $_SESSION['db'];
-	$userId = $_SESSION['userId'];
 	$db->openConnection();
 
 	$avalPallets = $db->getAllPallets();
 	$blockedPallets = $db->getBlockedPallets();
-//	$movieNames = $db->getMovieNames();
-//	$db->closeConnection();
 ?>
 
 <html>
