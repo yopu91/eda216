@@ -114,80 +114,16 @@ class Database {
         return $array;
     }
 
-    /**
-     * Return list of moviename
-     *
-     *
-     *  
-     * @return array of movies
-     */
-    public function getMovieNames() {
-        $sql = "select name from movies";
+    public function getAllPallets() {
+        $sql = 'select * from pallet';
         $result = $this->executeQuery($sql);
-        $tempArray = array();
-        foreach($result as $row){
-            $tempArray[] = $row[0];
-        }
-        return $tempArray; 
+        return $result;
     }
 
-    public function getMovieDates($movieName) {
-        $sql = "select date from performances where moviename = ?";
-        $result = $this->executeQuery($sql,array($movieName));
-        $tempArray = array();
-        foreach($result as $row){
-            $tempArray[] = $row["date"];
-        }
-        return $tempArray; 
-    }
-
-    public function getMovieData($movieName, $movieDate) {
-        $sql = "select theatreName, (theatres.seats - performances.takenSeats) as freeSeats ".
-            "from performances join theatres on ".
-            "performances.theatreName = theatres.name where performances.movieName = ? ".
-            "and performances.date = ?";
-        $result = $this->executeQuery($sql,array($movieName, $movieDate));
-        return $result[0]; 
-    }
-
-
-    public function bookTicket($movieName, $movieDate, $userName) {
-        $this->conn->beginTransaction();
-        if ($this->addReservation($movieName, $movieDate, $userName)) {
-            $this->updateSeats($movieName, $movieDate);
-            $this->conn->commit();
-            return $this->getNumber();
-        } else {
-            $this->conn->rollback();
-            return "nooooooooooooooooooooooo";
-        }
-    }
-
-    public function updateSeats($movieName, $movieDate) {
-        $sql = "update performances set takenSeats = takenSeats + 1 where ".
-            "movieName = ? and date = ?";
-        $this->executeUpdate($sql,array($movieName, $movieDate));
-    }
-
-
-    public function addReservation($movieName, $movieDate, $userName) {
-        $sql = "select (theatres.seats - performances.takenSeats) as freeSeats ".
-            "from performances join theatres on ".
-            "performances.theatreName = theatres.name where performances.movieName = ? ".
-            "and performances.date = ? for update";
-        $igetcheezburger = $this->executeQuery($sql, array($movieName, $movieDate));
-
-        $sql = "insert into reservations (movieName, date, username) ".
-            "values (?, ?, ?)";
-        $this->executeUpdate($sql,array($movieName, $movieDate, $userName));
-
-        return $igetcheezburger[0][0] > 0;
-    }
-
-    public function getNumber() {
-        $sql = "select last_insert_id()";
+    public function getBlockedPallets() {
+        $sql = 'select barcode, cookieName, blocked from pallet';
         $result = $this->executeQuery($sql);
-        return $result[0][0];
+        return $result;
     }
 }
 

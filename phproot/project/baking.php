@@ -14,6 +14,8 @@ $cookies = $db->getCookies();
 <body>
     <h1>Recipes</h1>
 
+    <a href=/project>Back to start</a>
+
 <?php 
     if ($cookie) {
         echo "<h2>$cookie</h2>";
