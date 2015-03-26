@@ -10,6 +10,8 @@
 <body>
 <h1>Pallets</h1>
 
+<a href=/project>Back to start</a>
+
 <table>
 <thead>
     <th>Barcode</th>
