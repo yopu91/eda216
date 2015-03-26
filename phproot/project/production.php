@@ -19,9 +19,9 @@
 <tbody>
 <?php
     foreach ($avalPallets as $pallet) {
-        $barcode = $recipe['barcode'];
-        $cookie = $recipe['cookieName'];
-        $blocked = $recipe['blocked'] ? 'BLOCKED' : '';
+        $barcode = $pallet['barcode'];
+        $cookie = $pallet['cookieName'];
+        $blocked = $pallet['blocked'] ? 'BLOCKED' : '';
 
         echo '<tr>';
         echo "<td>$barcode</td>";

@@ -1,0 +1,3 @@
+#! /bin/bash
+
+exec mysql db69 -h puccini.cs.lth.se -u db69 -ppasspass
