@@ -25,7 +25,7 @@
         foreach ($avalPallets as $pallet) {
             $barcode = $pallet['barcode'];
             $cookie = $pallet['cookieName'];
-            $blocked = $pallet['blocked'] ? 'BLOCKED' : '';
+            $blocked = $pallet['faulty'] ? 'BLOCKED' : '';
 
             echo '<tr>';
             echo "<td>$barcode</td>";

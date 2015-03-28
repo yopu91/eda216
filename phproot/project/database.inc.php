@@ -86,6 +86,7 @@ class Database {
         try {
             $stmt = $this->conn->prepare($query);
             $stmt->execute($param);
+            return $stmt->rowCount();
         } catch (PDOException $e) {
             $error = "*** Internal error: " . $e->getMessage() . "<p>" . $query;
             die($error);
@@ -100,9 +101,23 @@ class Database {
      * @return list of ingridents
      */
     public function getRecipe($name) {
-        $sql = 'select ingredientName, amount from ingredient where cookieName = ?';
+        $sql = <<<eof
+             select ingredientName, amount 
+             from ingredient 
+             where cookieName = ?
+             order by ingredientName
+eof;
         $result = $this->executeQuery($sql, array($name));
         return $result; 
+    }
+
+    public function registerSample($code, $status) {
+        $sql = <<<eof
+            insert into sample(palletCode, faulty, tested)
+            values (?, ?, ?)
+eof;
+        $this->executeUpdate($sql, array(
+            (string) $code, $status? 1 : 0, date('Y-m-d H:i:s')));
     }
 
     public function getCookies() {
@@ -115,13 +130,21 @@ class Database {
     }
 
     public function getAllPallets() {
-        $sql = 'select * from pallet';
+        $sql = <<<eof
+            select p.barcode, p.cookieName, s.faulty
+            from pallet p
+            left outer join sample s on p.barcode = s.palletCode and s.faulty
+eof;
         $result = $this->executeQuery($sql);
         return $result;
     }
 
     public function getBlockedPallets() {
-        $sql = 'select barcode, cookieName, blocked from pallet where blocked';
+        $sql = <<<eof
+            select p.barcode, p.cookieName
+            from pallet p
+            inner join sample s on p.barcode = s.palletCode and s.faulty
+eof;
         $result = $this->executeQuery($sql);
         return $result;
     }

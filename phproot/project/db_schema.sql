@@ -75,7 +75,6 @@ create table pallet (
     cookieName varchar(255) not null,
     loadingNumber integer,
     produced datetime not null,
-    blocked bool not null default false,
     primary key (barcode),
     foreign key (cookieName) references cookieType(name)
 );
@@ -100,7 +99,7 @@ create table sample (
     palletCode varchar(255) not null,
     faulty bool not null,
     tested datetime not null,
-    primary key (palletCode),
+    primary key (palletCode, tested),
     foreign key (palletCode) references pallet(barcode)
 );
 
