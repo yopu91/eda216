@@ -24,11 +24,6 @@ html {
 
     <a href=/project/>Back to start</a>
 
-<?php 
-    if ($cookie) {
-        echo "<h2>$cookie</h2>";
-    } 
-?>
     <form action=/project/baking.php method=get>
         <select name=cookie>
         <option<?php if (!$cookie) { echo' selected'; } ?>>
@@ -45,22 +40,27 @@ html {
     <input type=submit value=Get>
     </form>
 
+<?php 
+    if ($cookie) {
+        echo "<h2>Required ingredients for $cookie</h2>";
+        echo <<<eof
     <table>
     <thead>
         <th>Ingredient</th>
         <th>Amount</th>
     </thead>
     <tbody>
-<?php
-    foreach ($cookieRecipe as $recipe) {
-        $ingredient = $recipe['ingredientName'];
-        $amount = $recipe['amount'];
+eof;
+        foreach ($cookieRecipe as $recipe) {
+            $ingredient = $recipe['ingredientName'];
+            $amount = $recipe['amount'];
 
-        echo '<tr>';
-        echo "<td>$ingredient</td>";
-        echo "<td>$amount</td>";
-        echo '</tr>';
-    }
+            echo '<tr>';
+            echo "<td>$ingredient</td>";
+            echo "<td>$amount</td>";
+            echo '</tr>';
+        }
+    } 
 ?>
     </tbody>
     </table>

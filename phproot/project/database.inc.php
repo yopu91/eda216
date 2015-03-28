@@ -113,11 +113,29 @@ eof;
 
     public function registerSample($code, $status) {
         $sql = <<<eof
-            insert into sample(palletCode, faulty, tested)
+            insert into sample (palletCode, faulty, tested)
             values (?, ?, ?)
 eof;
         $this->executeUpdate($sql, array(
             (string) $code, $status? 1 : 0, date('Y-m-d H:i:s')));
+    }
+
+    public function newPallet($code, $type) {
+        $sql = <<<eof
+            insert into pallet (barcode, cookieName, produced)
+            values (?, ?, ?)
+eof;
+        $this->executeUpdate($sql, array(
+            (string) $code, $type, date('Y-m-d H:i:s')));
+    }
+
+    public function locatePallet($code, $location) {
+        $sql = <<<eof
+            insert into palletLocation (palletCode, locationName, arrived)
+            values (?, ?, ?)
+eof;
+        $this->executeUpdate($sql, array(
+            (string) $code, $location, date('Y-m-d H:i:s')));
     }
 
     public function getCookies() {
@@ -131,9 +149,10 @@ eof;
 
     public function getAllPallets() {
         $sql = <<<eof
-            select p.barcode, p.cookieName, s.faulty
+            select p.barcode, p.cookieName, p.produced, s.faulty
             from pallet p
             left outer join sample s on p.barcode = s.palletCode and s.faulty
+            order by produced desc
 eof;
         $result = $this->executeQuery($sql);
         return $result;
@@ -144,6 +163,7 @@ eof;
             select p.barcode, p.cookieName
             from pallet p
             inner join sample s on p.barcode = s.palletCode and s.faulty
+            order by produced desc
 eof;
         $result = $this->executeQuery($sql);
         return $result;

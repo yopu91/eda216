@@ -18,6 +18,7 @@
     <thead>
         <th>Barcode</th>
         <th>Cookie</th>
+        <th>Production date</th>
         <th></th>
     </thead>
     <tbody>
@@ -26,10 +27,12 @@
             $barcode = $pallet['barcode'];
             $cookie = $pallet['cookieName'];
             $blocked = $pallet['faulty'] ? 'BLOCKED' : '';
+            $date = $pallet['produced'];
 
             echo '<tr>';
             echo "<td>$barcode</td>";
             echo "<td>$cookie</td>";
+            echo "<td>$date</td>";
             echo "<td>$blocked</td>";
             echo '</tr>';
         }
