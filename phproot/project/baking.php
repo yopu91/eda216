@@ -10,7 +10,15 @@ $cookies = $db->getCookies();
 ?>
 
 <html>
-<head><title>Krusty Kookies Sweden AB</title></head>
+<head><title>Krusty Kookies Sweden AB</title>
+<style>
+html {
+    background: url('/swedish.jpg') no-repeat right bottom;
+    background-size: 500px;
+    height: 100%;
+}
+</style>
+</head>
 <body>
     <h1>Recipes</h1>
 

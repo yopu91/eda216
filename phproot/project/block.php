@@ -11,13 +11,19 @@ if ($code) {
 ?>
 
 <html>
-<head><title>Krusty Kookies Sweden AB</title></head>
+<head><title>Krusty Kookies Sweden AB</title>
+<style>
+html {
+    background: url('/virus.png') no-repeat right bottom;
+    background-size: 300px;
+    height: 100%;
+}
+</style>
+</head>
 <body>
     <h1>Register sample</h1>
 
     <a href=/project/>Back to start</a>
-
-    <img style='margin: 40px auto; height: 150' src=/virus.png>
 
 <?php
     if ($code) {
